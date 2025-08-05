@@ -1,0 +1,11 @@
+.products_list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.products_list li {
+  min-width: 300px;
+  margin: 20px;
+  list-style: none;
+}

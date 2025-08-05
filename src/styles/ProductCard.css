@@ -1,0 +1,10 @@
+.product_card {
+  box-shadow: 0 5px 5px 0 #ccc;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.product_card_img {
+  width: 150px;
+  height: 150px;
+}
