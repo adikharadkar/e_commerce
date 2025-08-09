@@ -3,7 +3,7 @@ import type { Product } from "../utils/types";
 
 const BASE_URL = "https://dummyjson.com/products";
 
-export const useFetchProducts = (productId = null) => {
+export const useFetchProducts = (productId?: string | null) => {
   const [products, setProducts] = useState<Product[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -17,7 +17,11 @@ export const useFetchProducts = (productId = null) => {
         throw new Error("Could not fetch data.");
       }
       const data = await response.json();
-      setProducts(data.products);
+      if ("products" in data) {
+        setProducts(data.products);
+      } else {
+        setProducts([data]);
+      }
     } catch (e: unknown) {
       if (e instanceof Error) {
         setError(e.message);
@@ -31,7 +35,7 @@ export const useFetchProducts = (productId = null) => {
 
   useEffect(() => {
     fetchProducts();
-  }, []);
+  }, [productId]);
 
   return { products, error, isLoading };
 };

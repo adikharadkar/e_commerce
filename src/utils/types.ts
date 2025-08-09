@@ -51,4 +51,11 @@ export interface ProductCardProps {
   thumbnail: string;
   rating: number;
   price: number;
+  id: number;
+}
+
+export interface PaginationProps {
+  numOfPages: number;
+  currentPage: number;
+  onPageChange: React.Dispatch<React.SetStateAction<number>>;
 }

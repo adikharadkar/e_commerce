@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ProductCard from "../components/ProductCard";
 import { useFetchProducts } from "../hooks/useFetchProducts";
+import Pagination from "../components/Pagination";
 import "../styles/Home.css";
 
 const ITEMS_PER_PAGE = 20;
@@ -16,23 +17,11 @@ const Home = () => {
   if (error) return <h1>{error}</h1>;
   return (
     <div>
-      <div className="pagination">
-        <button
-          onClick={() => setCurrentPage((prev) => prev - 1)}
-          disabled={currentPage === 0}
-        >
-          Previous
-        </button>
-        {[...Array(num_of_pages)].map((_, index) => (
-          <button onClick={() => setCurrentPage(index)}>{index + 1}</button>
-        ))}
-        <button
-          onClick={() => setCurrentPage((prev) => prev + 1)}
-          disabled={currentPage === num_of_pages - 1}
-        >
-          Next
-        </button>
-      </div>
+      <Pagination
+        onPageChange={setCurrentPage}
+        currentPage={currentPage}
+        numOfPages={num_of_pages}
+      />
       <ul className="products_list">
         {products.slice(startIndex, endIndex).map((item) => (
           <li key={item.id}>
@@ -41,6 +30,7 @@ const Home = () => {
               price={item.price}
               rating={item.rating}
               thumbnail={item.thumbnail}
+              id={item.id}
             />
           </li>
         ))}
