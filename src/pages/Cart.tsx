@@ -16,11 +16,14 @@ const Cart = () => {
   const endIndex = startIndex + ITEMS_PER_PAGE;
   return (
     <div>
-      <Pagination
-        numOfPages={num_of_pages}
-        currentPage={currentPage}
-        onPageChange={setCurrentPage}
-      ></Pagination>
+      {items.length > 0 && (
+        <Pagination
+          numOfPages={num_of_pages}
+          currentPage={currentPage}
+          onPageChange={setCurrentPage}
+        />
+      )}
+
       <main className="products">
         {items &&
           items
