@@ -52,6 +52,7 @@ export interface ProductCardProps {
   rating: number;
   price: number;
   id: number;
+  product: Product;
 }
 
 export interface PaginationProps {

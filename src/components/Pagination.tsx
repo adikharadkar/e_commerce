@@ -23,6 +23,7 @@ const Pagination = ({
             backgroundColor: currentPage === index ? "black" : "white",
             color: currentPage === index ? "white" : "black",
           }}
+          key={index}
         >
           {index + 1}
         </button>

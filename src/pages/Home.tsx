@@ -31,6 +31,7 @@ const Home = () => {
               rating={item.rating}
               thumbnail={item.thumbnail}
               id={item.id}
+              product={item}
             />
           </li>
         ))}
