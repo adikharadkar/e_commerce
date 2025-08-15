@@ -3,12 +3,26 @@ import type { Product } from "../utils/types";
 
 const BASE_URL = "https://dummyjson.com/products";
 
-export const useFetchProducts = (productId?: string | null) => {
+type IProps = {
+  productId?: string | null;
+  searchInput: string;
+};
+
+export const useFetchProducts = ({ productId, searchInput = "" }: IProps) => {
   const [products, setProducts] = useState<Product[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const url = productId ? `${BASE_URL}/${productId}` : `${BASE_URL}?limit=500`;
+  let url;
+  if (productId) {
+    url = `${BASE_URL}/${productId}`;
+  } else if (searchInput.length >= 3) {
+    url = `${BASE_URL}/search?q=${searchInput}`;
+  } else {
+    url = `${BASE_URL}?limit=500`;
+  }
+
+  // const url = productId ? `${BASE_URL}/${productId}` : `${BASE_URL}?limit=500`;
 
   const fetchProducts = async () => {
     try {
@@ -35,7 +49,7 @@ export const useFetchProducts = (productId?: string | null) => {
 
   useEffect(() => {
     fetchProducts();
-  }, [productId]);
+  }, [productId, searchInput]);
 
   return { products, error, isLoading };
 };

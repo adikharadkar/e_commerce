@@ -1,0 +1,24 @@
+.navbar {
+  /* display: flex;
+  justify-content: space-between; */
+  padding: 5px;
+  box-shadow: 0 3px 3px 3px #ccc;
+  margin: 20px 30px;
+  margin-top: 0;
+}
+
+.navbar ul li {
+  list-style: none;
+}
+
+.navbar-list {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 0;
+  align-items: center;
+  margin: 10px 20px;
+}
+
+.search-field {
+  width: 30vw;
+}

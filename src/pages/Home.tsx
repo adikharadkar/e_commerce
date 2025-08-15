@@ -1,25 +1,38 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ProductCard from "../components/ProductCard";
 import { useFetchProducts } from "../hooks/useFetchProducts";
 import Pagination from "../components/Pagination";
 import ProductTable from "../components/ProductTable";
 import "../styles/Home.css";
+import Products from "../shimmer_ui/Products";
 
 const ITEMS_PER_PAGE = 20;
 
-const Home = () => {
-  const { products, error, isLoading } = useFetchProducts();
+interface IProps {
+  searchInput: string;
+}
+
+const Home = ({ searchInput }: IProps) => {
+  const { products, error, isLoading } = useFetchProducts({
+    searchInput: searchInput,
+  });
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [selectedView, setSelectedView] = useState<string>("list");
   const num_of_pages = Math.ceil(products.length / ITEMS_PER_PAGE);
   const startIndex = ITEMS_PER_PAGE * currentPage;
   const endIndex = startIndex + ITEMS_PER_PAGE;
 
+  console.log("Aditya", products);
+
+  useEffect(() => {
+    setCurrentPage(0);
+  }, [searchInput]);
+
   const handleViewChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedView(e.target.value);
   };
 
-  if (isLoading) return <h1>Loading...</h1>;
+  if (isLoading) return <Products />;
   if (error) return <h1>{error}</h1>;
   return (
     <div>
