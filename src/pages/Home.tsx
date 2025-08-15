@@ -6,6 +6,7 @@ import ProductTable from "../components/ProductTable";
 import "../styles/Home.css";
 import Products from "../shimmer_ui/Products";
 import Categories from "../components/Categories";
+import CategoriesShimmer from "../shimmer_ui/Categories";
 
 const ITEMS_PER_PAGE = 20;
 
@@ -31,7 +32,13 @@ const Home = ({ searchInput }: IProps) => {
     setSelectedView(e.target.value);
   };
 
-  if (isLoading) return <Products />;
+  if (isLoading)
+    return (
+      <>
+        <CategoriesShimmer />
+        <Products />
+      </>
+    );
   if (error) return <h1>{error}</h1>;
   return (
     <div>

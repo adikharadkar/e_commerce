@@ -1,10 +1,12 @@
-import { useState, useEffect, useRef } from "react";
+import { useRef } from "react";
 import { NavLink } from "react-router-dom";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
+
+import { useFetchCategories } from "../hooks/useFetchCategories";
 import "../styles/Categories.css";
 
 const Categories = () => {
-  const [categories, setCategories] = useState<string[]>([]);
+  const { categories, error } = useFetchCategories();
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const scroll = (direction: string) => {
@@ -15,33 +17,8 @@ const Categories = () => {
       });
     }
   };
+  if (error) return <h1>{error}</h1>;
 
-  const fetchCategories = async () => {
-    try {
-      const response = await fetch(
-        "https://dummyjson.com/products/category-list"
-      );
-      if (!response.ok) {
-        throw new Error("Could not fetch categories");
-      }
-      const data = await response.json();
-      let category_list: string[] = [];
-      data.forEach((d: string) => {
-        let replaced_str: string = d;
-        if (d.includes("-")) {
-          replaced_str = d.replace("-", " ");
-        }
-        category_list.push(replaced_str);
-      });
-      setCategories(category_list);
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
-  useEffect(() => {
-    fetchCategories();
-  }, []);
   return (
     <div className="categories">
       <button
