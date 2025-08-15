@@ -4,7 +4,9 @@ import { useFetchProducts } from "../hooks/useFetchProducts";
 
 const Product = () => {
   const { prodId } = useParams();
-  const { products, error, isLoading } = useFetchProducts(prodId);
+  const { products, error, isLoading } = useFetchProducts({
+    productId: prodId,
+  });
   const product = products[0];
 
   if (error) return <h1>Could not fetch product.</h1>;

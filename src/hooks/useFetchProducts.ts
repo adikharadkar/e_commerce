@@ -5,7 +5,7 @@ const BASE_URL = "https://dummyjson.com/products";
 
 type IProps = {
   productId?: string | null;
-  searchInput: string;
+  searchInput?: string;
 };
 
 export const useFetchProducts = ({ productId, searchInput = "" }: IProps) => {

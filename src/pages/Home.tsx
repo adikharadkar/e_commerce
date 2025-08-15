@@ -5,6 +5,7 @@ import Pagination from "../components/Pagination";
 import ProductTable from "../components/ProductTable";
 import "../styles/Home.css";
 import Products from "../shimmer_ui/Products";
+import Categories from "../components/Categories";
 
 const ITEMS_PER_PAGE = 20;
 
@@ -22,8 +23,6 @@ const Home = ({ searchInput }: IProps) => {
   const startIndex = ITEMS_PER_PAGE * currentPage;
   const endIndex = startIndex + ITEMS_PER_PAGE;
 
-  console.log("Aditya", products);
-
   useEffect(() => {
     setCurrentPage(0);
   }, [searchInput]);
@@ -36,6 +35,7 @@ const Home = ({ searchInput }: IProps) => {
   if (error) return <h1>{error}</h1>;
   return (
     <div>
+      <Categories />
       <Pagination
         onPageChange={setCurrentPage}
         currentPage={currentPage}

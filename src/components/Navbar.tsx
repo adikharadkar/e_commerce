@@ -1,6 +1,7 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { FiUser, FiShoppingCart, FiSearch } from "react-icons/fi";
 import type { RootState } from "../utils/store";
 import "../styles/Navbar.css";
 
@@ -11,7 +12,6 @@ interface IProps {
 const Navbar = ({ onSearchInput }: IProps) => {
   const items = useSelector((store: RootState) => store.cart.items);
   const [searchInput, setSearchInput] = useState<string>("");
-  const [deboundedSearchInput, setDebouncedSearchInput] = useState<string>("");
   const debounceTimeout = useRef<number | null>(null);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,37 +21,19 @@ const Navbar = ({ onSearchInput }: IProps) => {
       clearTimeout(debounceTimeout.current);
     }
     debounceTimeout.current = setTimeout(() => {
-      setDebouncedSearchInput(value);
       onSearchInput(value);
     }, 3000);
   };
-
-  const fetchSearchedProduct = async () => {
-    try {
-      const response = await fetch(
-        `https://dummyjson.com/products/search?q=${deboundedSearchInput}`
-      );
-      if (!response.ok) {
-        throw new Error("Product not found!");
-      }
-      const data = await response.json();
-      console.log(data);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  useEffect(() => {
-    fetchSearchedProduct();
-  }, [deboundedSearchInput]);
 
   return (
     <div className="navbar">
       <ul className="navbar-list">
         <li>
-          <NavLink to="/">Home</NavLink>
+          <NavLink to="/" className="navbar-header">
+            MegaMart
+          </NavLink>
         </li>
-        <li>
+        <li className="search-wrapper">
           <input
             type="search"
             name="search"
@@ -61,9 +43,19 @@ const Navbar = ({ onSearchInput }: IProps) => {
             value={searchInput}
             onChange={handleInputChange}
           />
+          <FiSearch className="icon search-icon" />
         </li>
         <li>
-          <NavLink to="/cart">Cart {items.length}</NavLink>
+          <NavLink to="/" className="signin-signup">
+            <FiUser className="icon" />
+            Sign Up/Sign In
+          </NavLink>
+        </li>
+        <li className="cart-wrapper">
+          <FiShoppingCart className="icon" />
+          <NavLink to="/cart" className="cart-title">
+            Cart {items.length}
+          </NavLink>
         </li>
       </ul>
     </div>
