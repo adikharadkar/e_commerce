@@ -42,6 +42,7 @@ const Navbar = ({ onSearchInput }: IProps) => {
             className="search-field"
             value={searchInput}
             onChange={handleInputChange}
+            data-testid="search-input"
           />
           <FiSearch className="icon search-icon" />
         </li>
