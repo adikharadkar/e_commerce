@@ -13,6 +13,7 @@ const Pagination = ({
         style={{
           cursor: currentPage === 0 ? "not-allowed" : "pointer",
         }}
+        data-testid="prev-button"
       >
         Previous
       </button>
@@ -24,6 +25,7 @@ const Pagination = ({
             color: currentPage === index ? "white" : "black",
           }}
           key={index}
+          data-testid={`page-button-${index}`}
         >
           {index + 1}
         </button>
@@ -34,6 +36,7 @@ const Pagination = ({
         style={{
           cursor: currentPage === numOfPages - 1 ? "not-allowed" : "pointer",
         }}
+        data-testid="next-button"
       >
         Next
       </button>

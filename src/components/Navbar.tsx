@@ -47,7 +47,7 @@ const Navbar = ({ onSearchInput }: IProps) => {
           <FiSearch className="icon search-icon" />
         </li>
         <li>
-          <NavLink to="/" className="signin-signup">
+          <NavLink to="/" className="signin-signup" data-testid="signin-signup">
             <FiUser className="icon" />
             Sign Up/Sign In
           </NavLink>
