@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import store from "./utils/store";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
+import RegistrationForm from "./components/RegistrationForm";
 import "./App.css";
 import Product from "./pages/Product";
 import Cart from "./pages/Cart";
@@ -19,6 +20,7 @@ function App() {
           <Route path="/" element={<Home searchInput={searchedInput} />} />
           <Route path="/products/:prodId" element={<Product />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/register" element={<RegistrationForm />} />
         </Routes>
       </Provider>
     </>
